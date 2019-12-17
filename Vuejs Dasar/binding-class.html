@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- kehadiran class active ditentukan berdasarkan nilai property isActive -->
+    <div id="app" class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+
+    <!-- array syntax, menambahkan class -->
+    <div id="app2" v-bind:class="[activeClass, errorClass]"></div>
+
+    <!-- activeClass akan tampil berdasarkan nilai dari isActive -->
+    <!-- <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div> -->
+    
+    <!-- cara lain lebih simpel untuk menampilkan class active berdasarkan nilai dari isActive -->
+    <!-- <div v-bind:class="[{ active: isActive }, errorClass]"></div> -->
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                isActive: true,
+                hasError: false
+            }
+        })
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                activeClass: 'active',
+                errorClass: 'text-danger'
+            }
+        })
+    </script>
+</body>
+
+</html>

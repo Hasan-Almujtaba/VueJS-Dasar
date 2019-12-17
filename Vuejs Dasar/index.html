@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Belajar Vuejs</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- ternary operator -->
+        {{ gender ? 'dia laki-laki' : 'dia perempuan' }}
+        <br>
+        <!-- v-html untuk menampilkan komponen sebagai html -->
+        {{ nama }} - {{ umur }} -<span v-html="rawHtml"></span>
+    </div>
+
+    <!-- computed properties -->
+    <div id="comp">
+        {{ a }}
+        <p>Hasil {{ a }} + 2 = {{ b }}</p>
+        <p>Hasil dari {{ int1 }} + {{ int2 }} adalah {{ sum }} </p>
+    </div>
+
+    <!-- conditional directives -->
+    <div id="condition">
+        <div v-if="check">
+            Pesan sampai
+        </div>
+        <div v-else>
+            Menunggu pesan
+        </div>
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                nama: 'Hasan',
+                umur: 100,
+                rawHtml: '<p> <b>aman terkendali </b> </p>',
+                gender: true
+            }
+        })
+
+        // computed properties / properties yang berkegantungan
+        var comp = new Vue({
+            el: '#comp',
+            data: {
+                a: 1,
+                int1: 12,
+                int2: 67
+            },
+            computed: {
+                b: {
+                    get: function () {
+                        return this.a + 2
+                    },
+                    set: function (a) {
+                        this.a = a
+                    }
+                },
+                sum: function () {
+                    return this.int1 + this.int2
+                }
+            }
+
+        })
+
+        // conditional directives
+        var condition = new Vue({
+            el: '#condition',
+            data: {
+                check: true
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Menjalankan event ketika tombol diklik -->
+    <div id="app">
+        <button v-on:click="counter++">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+
+    <div id="app2">
+        <button v-on:click="greet">Greet</button>
+    </div>
+
+    <br>
+
+    <div id="app3">
+        <button v-on:click="say('Hello')">Say Hello</button>
+        <button v-on:click="say('Good Bye')">Say Good Bye</button>
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                counter: 0
+            }
+        })
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                name: 'Hasan Al Mujtaba'
+            },
+            methods: {
+                greet: function () {
+                    alert('Hello ' + this.name)
+                }
+            }
+        })
+
+        var app3 = new Vue({
+            el: '#app3',
+            methods: {
+                say: function (message) {
+                    alert(message)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

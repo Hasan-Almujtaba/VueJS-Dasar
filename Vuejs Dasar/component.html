@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- component basic -->
+    <div id="components-demo">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+
+    <hr>
+
+    <!-- props -->
+    <div id="blog">
+        <blog-post title="New Post"></blog-post>
+        <blog-post title="Old Post"></blog-post>
+    </div>
+
+    <hr>
+
+    <!-- refactor -->
+    <div id="blog2">
+        <!-- v-bind:post => dari props, content dari property contents -->
+        <blog-post2 v-for="post in posts" v-bind:key="post.id" v-bind:post="post"></blog-post2>
+    </div>
+
+    <hr>
+
+    <!-- event on component -->
+    <div id="blog-post-event">
+        <div :style="{ fontSize: postFontSize + 'em' }">
+            <comp-event v-on:enlarge-text="postFontSize += 0.1" v-for="post in posts" v-bind:key="post.id"
+                v-bind:post="post"></comp-event>
+        </div>
+    </div>
+
+    <!-- Slots -->
+    <div id="slot">
+        <alert-box>Something Bad Happened</alert-box>
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // membuat komponen baru bernama button-counter
+        Vue.component('button-counter', {
+            // data harus merupakan sebuah function
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button v-on:click="count++">Clicked {{ count }} times</button> '
+        })
+
+        var app = new Vue({
+            el: '#components-demo'
+        })
+
+        // component blog
+        Vue.component('blog-post', {
+            props: ['title'],
+            template: '<h3> {{ title }} </h3>'
+        })
+
+        var app2 = new Vue({
+            el: '#blog'
+        })
+
+        // component blog2
+        Vue.component('blog-post2', {
+            props: ['post'],
+            template: `<div class="blog-post">
+                            <h3> {{ post.title }} </h3> 
+                            <div v-html="post.content"></div>
+                        </div>`
+        })
+
+        var app3 = new Vue({
+            el: '#blog2',
+            data: {
+                posts: [{
+                    id: 1,
+                    title: 'First Post',
+                    content: 'Some text'
+                }, {
+                    id: 2,
+                    title: 'Second Post',
+                    content: 'Some text'
+                }, {
+                    id: 3,
+                    title: 'First Post',
+                    content: 'Some text'
+                }]
+            }
+        })
+
+        // component event
+        Vue.component('comp-event', {
+            props: ['post'],
+            template: `
+            <div class="blog-post">
+                <h3>{{ post.title }}</h3>
+                <button v-on:click="$emit('enlarge-text')">
+                    Enlarge text
+                </button>
+                <div v-html="post.content"></div>
+            </div>
+            `
+
+        })
+
+        var app4 = new Vue({
+            el: '#blog-post-event',
+            data: {
+                posts: [{
+                    id: 1,
+                    title: 'First Post',
+                    content: 'Some text'
+                }, {
+                    id: 2,
+                    title: 'Second Post',
+                    content: 'Some text'
+                }, {
+                    id: 3,
+                    title: 'First Post',
+                    content: 'Some text'
+                }],
+                postFontSize: 1
+            }
+        })
+
+        // Using Slots
+        Vue.component('alert-box', {
+            template: `
+                <div class="demo-alert-box">
+                    <strong>Error!</strong>
+                    <slot></slot>
+                </div>
+            `
+        })
+
+        var app5 = new Vue({
+            el: '#slot'
+        })
+    </script>
+</body>
+
+</html>

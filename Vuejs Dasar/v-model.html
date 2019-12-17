@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="text">
+        <p> {{ text }} </p>
+        <textarea cols="30" rows="10" v-model="textarea"></textarea>
+        <p style="white-space: pre-line;"> {{ textarea }} </p>
+        <input type="radio" v-model="radio" value="Option 1"> Option 1
+        <br>
+        <input type="radio" v-model="radio" value="Option 2"> Option 2
+        <p> {{ radio }} </p>
+        <input type="checkbox" v-model="checkbox" value="Best"> Best
+        <input type="checkbox" v-model="checkbox" value="Great"> Great
+        <input type="checkbox" v-model="checkbox" value="Amazing"> Amazing
+        <p> You are {{ checkbox }} </p>
+        <select v-model="select" multiple>
+            <option value="" disabled>Choose one</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Java">Java</option>
+            <option value="C#">C#</option>
+        </select>
+        <p> Your favorite programming language is : {{ select }} </p>
+    </div>
+
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                text: '',
+                textarea: '',
+                radio: '',
+                checkbox: [],
+                select: []
+            }
+        })
+    </script>
+</body>
+
+</html>

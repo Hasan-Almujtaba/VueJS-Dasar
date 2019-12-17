@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <button v-on:click="message = 'the button has been clicked using v-on:click' ">
+            Click
+        </button>
+        <button @click="message = 'the button has been clicked using @click' ">
+            Click Me!
+        </button>
+        <button @click="showAlert">
+            Show Alert
+        </button>
+
+        <p> {{ message }} </p>
+
+        <select name="" id="" @change="showInfo">
+            <option v-for="option in options" v-bind:value="option"> {{ option }} </option>
+        </select>
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                options: ['Javascript', 'PHP', 'Phyton']
+            },
+            methods: {
+                showAlert: function () {
+                    alert('The button has been clicked to call this method')
+                },
+                showInfo: function () {
+                    alert('Thank you for choosing')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

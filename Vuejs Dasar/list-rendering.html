@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <ul id="ex">
+        <li v-for="item in items">
+            {{ item.text }}
+        </li>
+    </ul>
+
+    <ul id="ex2">
+        <li v-for="(item, index) in items">
+            {{ parent }} - {{ index }} - {{ item.text }}
+        </li>
+    </ul>
+
+    <ul id="ex3">
+        <li v-for="(value, name, index) in object">
+            {{ index }}. {{ name }} : {{ value }}
+        </li>
+    </ul>
+
+    <div id="ex4">
+        <span v-for="n in 10">{{ n }} </span>
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#ex",
+            data: {
+                items: [{
+                    text: 'Good'
+                }, {
+                    text: 'Job'
+                }, {
+                    text: 'Thank'
+                }, {
+                    text: 'you'
+                }]
+            }
+        })
+
+        var app2 = new Vue({
+            el: '#ex2',
+            data: {
+                parent: 'Index',
+                items: [{
+                    text: 'Good'
+                }, {
+                    text: 'Job'
+                }, {
+                    text: 'Thank'
+                }, {
+                    text: 'you'
+                }]
+            }
+        })
+
+        var app3 = new Vue({
+            el: '#ex3',
+            data: {
+                object: {
+                    title: 'List Vue JS',
+                    author: 'Hasan Al Mujtaba',
+                    publishedAt: 'Now'
+                }
+            }
+        })
+
+        var app4 = new Vue({
+            el: '#ex4',
+            data: {
+                // n: 'hello world'
+            }
+        })
+    </script>
+</body>
+
+</html>

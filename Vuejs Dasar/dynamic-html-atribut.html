@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <img v-bind:src="imageFile" alt="" width="500" height="500">
+        <br>
+        <a v-bind:href="link">Another Page</a>
+        <p v-bind:style="styleFont">Red Words</p>
+    </div>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                imageFile: 'assets/images/image1.jpg',
+                link: 'index.html',
+                styleFont: {
+                    color: 'red',
+                    fontSize: '30px'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

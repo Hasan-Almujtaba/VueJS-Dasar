@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        div {
+            margin: 25px 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- text -->
+    <div id="app">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p>
+    </div>
+
+    <!-- Multiline Text -->
+    <div id="app2">
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </div>
+
+    <!-- Checkbox -->
+    <div id="app3">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox"> {{ checked }} </label>
+    </div>
+
+    <!-- Multiple Checkbox -->
+    <div id="app4">
+        <input type="checkbox" id="work" value="Work" v-model="checkedWord">
+        <label for="work">Work</label>
+        <input type="checkbox" id="play" value="Play" v-model="checkedWord">
+        <label for="play">Play</label>
+        <input type="checkbox" id="rest" value="Rest" v-model="checkedWord">
+        <label for="rest">Rest</label>
+        <br>
+        <span>Checked word: {{ checkedWord }} </span>
+    </div>
+
+    <!-- Radio -->
+    <div id="app5">
+        <input type="radio" id="first" value="First" v-model="radio">
+        <label for="first">First</label>
+        <input type="radio" id="second" value="Second" v-model="radio">
+        <label for="second">Second</label>
+        <br>
+        <span>Picked : {{ radio }} </span>
+    </div>
+
+    <!-- Select -->
+    <div id="app6">
+        <select id="select" v-model="select">
+            <option value="">Please Select One</option>
+            <option value="A">LOL</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <br>
+        <span>Selected : {{ select }} </span>
+    </div>
+
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: ''
+            }
+        })
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                message: ''
+            }
+        })
+
+        var app3 = new Vue({
+            el: '#app3',
+            data: {
+                checked: false
+            }
+        })
+
+        var app4 = new Vue({
+            el: '#app4',
+            data: {
+                checkedWord: []
+            }
+        })
+
+        var app5 = new Vue({
+            el: '#app5',
+            data: {
+                radio: ''
+            }
+        })
+
+        var app6 = new Vue({
+            el: '#app6',
+            data: {
+                select: ''
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>
