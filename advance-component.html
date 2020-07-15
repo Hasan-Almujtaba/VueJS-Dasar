@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Component Vuejs</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container" id="app">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            Biodata
+          </div>
+          <div class="card-body">
+            <div v-if="show == 'biodata'">
+              <biodata ref="form" @send-data="getData" />
+            </div>
+            <div v-else>
+              <showprofile :data="data" />
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary btm-sm" @click="saveData" :disabled="button">
+              {{ button ? 'Loading...' : buttonTitle }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/x-template" id="biodataform">
+    <div>
+        <div class="form-group">
+            <label for="">Nama Lengkap</label>
+            <input type="text" 
+                class="form-control" 
+                v-model="data.nama"
+                :class="{ 'is-invalid' : valName }"
+                >
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" 
+                class="form-control" 
+                v-model="data.email"
+                :class="{ 'is-invalid' : valEmail }"
+                >
+        </div>
+     </div>
+   </script>
+
+  <script type="text/x-template" id="showform">
+    <div>
+          <table class="table table-hover">
+              <tr>
+                  <th>Nama Lengkap</th>
+                  <td>:</td>
+                  <td>{{ data.nama }}</td>
+              </tr>
+              <tr>
+                  <th>Email</th>
+                  <td>:</td>
+                  <td>{{ data.email }}</td>
+              </tr>
+          </table>
+      </div>
+  </script>
+  ​
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script>
+    Vue.component('showprofile', {
+      template: '#showform',
+      props: ['data']
+    })
+
+    Vue.component('biodata', {
+      template: '#biodataform',
+      data() {
+        return {
+          data: {
+            nama: '',
+            email: ''
+          }
+        }
+      },
+      mounted() {
+        this.data = {
+          nama: '',
+          email: ''
+        }
+      },
+      methods: {
+        submitForm() {
+          this.$emit('send-data', this.data)
+        }
+      },
+      computed: {
+        valName() {
+          if (this.data.nama.length === 0 || this.data.nama.length > 50) {
+            return true;
+          }
+          return false;
+        },
+        valEmail() {
+          var re =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (re.test(this.data.email)) {
+            return false;
+          }
+          return true;
+        }
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        show: 'biodata',
+        button: false,
+        buttonTitle: 'Save',
+        data: {}
+      },
+      methods: {
+        saveData() {
+          this.button = true
+          if (this.show == 'biodata' && !this.$refs.form.valName && !this.$refs.form.valEmail) {
+            setTimeout(() => {
+              this.$refs.form.submitForm()
+              this.show = 'showprofile'
+              this.buttonTitle = 'Back'
+              this.button = false
+            }, 1000)
+          } else {
+            setTimeout(() => {
+              this.data = {}
+              this.show = 'biodata'
+              this.button = false
+              this.buttonTitle = 'Save'
+            }, 500)
+          }
+        },
+        getData(value) {
+          this.data = {
+            nama: value.nama,
+            email: value.email
+          }
+        }
+      }
+    })
+  </script>
+
+  </script>
+</body>
+
+</html>
